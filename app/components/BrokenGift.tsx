@@ -303,17 +303,6 @@ export default function BrokenGift() {
                   </div>
                 </div>
               </div>
-
-              {/* Section number badge */}
-              <div
-                className="absolute bottom-8 right-8 md:bottom-10 md:right-12 z-10 text-[80px] md:text-[120px] font-bold leading-none select-none pointer-events-none"
-                style={{
-                  color: section.textColor === "white" ? "rgba(255,255,255,0.06)" : "rgba(0,0,0,0.05)",
-                  fontFamily: "'Georgia', serif",
-                }}
-              >
-                0{i + 1}
-              </div>
             </div>
           </div>
         </section>
