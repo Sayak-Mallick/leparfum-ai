@@ -120,7 +120,15 @@ export default function Footer() {
         </div>
 
         {/* Divider */}
-        <div className="my-8 border-t border-black/10"></div>
+        <div className="my-8 w-full">
+          <Image 
+            src="/footer.png" 
+            alt="Footer Divider" 
+            width={1200} 
+            height={100} 
+            className="w-full h-auto object-contain" 
+          />
+        </div>
 
         {/* Bottom row */}
         <div className="flex flex-col md:flex-row items-center justify-between gap-6 md:gap-0">
