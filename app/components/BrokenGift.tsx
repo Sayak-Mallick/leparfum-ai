@@ -14,11 +14,9 @@ export default function BrokenGift() {
               className="object-cover"
               priority
             />
-            {/* Gradient overlay for mobile readability */}
             <div className="absolute inset-0 bg-black/20 md:bg-transparent" />
           </div>
 
-          {/* Content - Adjusted padding and alignment for mobile */}
           <div className="relative z-10 flex h-full max-w-[550px] flex-col justify-end md:justify-start gap-6 md:gap-8 p-6 sm:p-10 md:p-16 md:pt-[210px]">
             <h2 className="text-3xl md:text-4xl font-normal uppercase leading-tight text-white">
               The Broken Gift
