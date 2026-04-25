@@ -1,11 +1,10 @@
-import HeroSection from "./components/HeroSection";
+import HeroSection from "./components/Hero-section";
 import Footer from "./components/Footer";
-import BrokenGift from "./components/BrokenGift";
+import BrokenGift from "./components/Broken-gift";
 import Testimonials from "./components/Testimonials";
 import FAQ from "./components/FAQ";
-import BottleOrbit from "./components/BottleOrbit";
-import HowItWorks from "./components/HowItWorks";
-import ChooseYourWorld from "./components/ChooseYourWorld";
+import BottleOrbit from "./components/Bottle-orbit";
+import HowItWorks from "./components/How-it-works";
 
 export default function Home() {
   return (
@@ -13,7 +12,6 @@ export default function Home() {
       <HeroSection />
       <BrokenGift />
       <HowItWorks />
-      <ChooseYourWorld />
       <BottleOrbit />
       <Testimonials />
       <FAQ />
