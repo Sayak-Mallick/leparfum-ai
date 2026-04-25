@@ -10,7 +10,6 @@ export default function Footer() {
   return (
     <footer className="relative bg-stone-100 pb-12 pt-20">
       <div className="px-6 md:px-32">
-        {/* Top row */}
         <div className="flex flex-col md:flex-row items-start justify-between gap-12 md:gap-0">
           <Image
             src="/logo-black.png"
@@ -19,9 +18,7 @@ export default function Footer() {
             height={31}
             className="h-8 w-40 object-contain"
           />
-
           <div className="flex flex-col md:flex-row gap-12 md:gap-20">
-            {/* Site nav */}
             <nav className="flex flex-col gap-4" aria-label="Site">
               <Link
                 href="#"
@@ -36,8 +33,6 @@ export default function Footer() {
                 leparfum.ai
               </Link>
             </nav>
-
-            {/* Services nav */}
             <nav className="flex flex-col gap-4" aria-label="Services">
               <Link
                 href="#"
@@ -58,8 +53,6 @@ export default function Footer() {
                 Hospitality
               </Link>
             </nav>
-
-            {/* Contact */}
             <div className="flex flex-col gap-2">
               <Link
                 href="mailto:enquiries@leparfum.ai"
@@ -94,8 +87,6 @@ export default function Footer() {
                 media@leparfum.ai
               </Link>
             </div>
-
-            {/* Legal */}
             <nav className="flex flex-col gap-4" aria-label="Legal">
               <Link
                 href="#"
@@ -118,8 +109,6 @@ export default function Footer() {
             </nav>
           </div>
         </div>
-
-        {/* Divider */}
         <div className="my-8 w-full">
           <Image 
             src="/footer.png" 
@@ -129,8 +118,6 @@ export default function Footer() {
             className="w-full h-auto object-contain" 
           />
         </div>
-
-        {/* Bottom row */}
         <div className="flex flex-col md:flex-row items-center justify-between gap-6 md:gap-0">
           <p className="text-xs font-normal leading-4 text-black">
             © {new Date().getFullYear()} leparfum.ai. All rights reserved.

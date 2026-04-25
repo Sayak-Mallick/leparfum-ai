@@ -108,7 +108,6 @@ export default function BrokenGift() {
     }
     requestAnimationFrame(raf);
 
-    // Sync Lenis with ScrollTrigger
     lenis.on("scroll", ScrollTrigger.update);
 
     gsap.ticker.add((time) => {
@@ -123,7 +122,6 @@ export default function BrokenGift() {
         const img = imagesRef.current[i];
         const text = textsRef.current[i];
 
-        // Parallax on the image — moves slower than the scroll
         if (img) {
           gsap.fromTo(
             img,
@@ -141,7 +139,6 @@ export default function BrokenGift() {
           );
         }
 
-        // Text reveal: fade + slight upward drift on enter
         if (text) {
           gsap.fromTo(
             text.children,
@@ -161,7 +158,6 @@ export default function BrokenGift() {
           );
         }
 
-        // Section scale-in on enter
         gsap.fromTo(
           section.querySelector(".card-inner"),
           { scale: 0.97, borderRadius: "32px" },
@@ -199,7 +195,6 @@ export default function BrokenGift() {
               className="card-inner relative min-h-[650px] md:h-[722px] overflow-hidden rounded-2xl"
               style={{ backgroundColor: section.bg }}
             >
-              {/* Parallax image wrapper */}
               <div
                 ref={(el) => { imagesRef.current[i] = el; }}
                 className="absolute inset-0 z-0 will-change-transform"
@@ -211,7 +206,7 @@ export default function BrokenGift() {
                   fill
                   className="object-cover"
                   priority={i === 0}
-                  onError={() => { }} // graceful fallback if image missing
+                  onError={() => { }}
                 />
                 <div
                   className="absolute inset-0"
@@ -223,21 +218,16 @@ export default function BrokenGift() {
                   }}
                 />
               </div>
-
-              {/* Text content */}
               <div
                 ref={(el) => { textsRef.current[i] = el; }}
                 className="relative z-10 flex h-full max-w-[560px] flex-col justify-end md:justify-start gap-6 md:gap-8 p-6 sm:p-10 md:p-16 md:pt-[200px]"
               >
-                {/* Eyebrow */}
                 <span
                   className="text-[10px] md:text-xs font-semibold uppercase tracking-[0.2em]"
                   style={{ color: section.textColor === "white" ? "rgba(255,255,255,0.6)" : "rgba(0,0,0,0.5)" }}
                 >
                   {section.eyebrow}
                 </span>
-
-                {/* Title */}
                 <h2
                   className="text-3xl md:text-5xl font-normal uppercase leading-tight"
                   style={{
@@ -248,16 +238,12 @@ export default function BrokenGift() {
                 >
                   {section.title}
                 </h2>
-
-                {/* Body */}
                 <p
                   className="text-sm md:text-base font-normal leading-relaxed max-w-[420px]"
                   style={{ color: section.textColor === "white" ? "rgba(255,255,255,0.85)" : "rgba(0,0,0,0.7)" }}
                 >
                   {section.body}
                 </p>
-
-                {/* CTA row */}
                 <div className="flex flex-col sm:flex-row items-start sm:items-end gap-4 sm:gap-2">
                   <div
                     className="flex size-10 md:size-12 shrink-0 items-center justify-center rounded-full text-[18px] md:text-[20px] font-bold"

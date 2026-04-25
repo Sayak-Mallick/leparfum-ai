@@ -73,7 +73,6 @@ export default function ChooseYourWorld() {
 
   return (
     <section className="overflow-hidden bg-stone-100 py-8">
-      {/* Heading */}
       <div className="mb-12 px-32">
         <h2 className="mb-4 text-4xl font-normal uppercase leading-10 text-black">
           Choose your world
@@ -82,8 +81,6 @@ export default function ChooseYourWorld() {
           Which story will you write in scent?
         </p>
       </div>
-
-      {/* Cards row */}
       <div
         className="flex items-start justify-center gap-4 "
         onMouseLeave={handleMouseLeave}
@@ -98,7 +95,6 @@ export default function ChooseYourWorld() {
             className="relative flex shrink-0 cursor-pointer flex-col overflow-hidden rounded-lg transition-shadow hover:shadow-xl"
             style={{ width: 448, height: COLLAPSED_HEIGHT }}
           >
-            {/* Image — fixed height, never changes */}
             <div className="relative shrink-0" style={{ height: IMAGE_HEIGHT }}>
               <Image
                 src={card.image}
@@ -108,8 +104,6 @@ export default function ChooseYourWorld() {
                 className="object-cover"
               />
             </div>
-
-            {/* Content — sits below the image in normal flow */}
             <div
               ref={(el) => {
                 if (el) contentRefs.current[idx] = el;

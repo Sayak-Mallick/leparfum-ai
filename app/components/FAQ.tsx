@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState, useRef, useEffect } from "react";
+import { useState, useRef, useEffect } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 
@@ -37,7 +37,6 @@ const faqs = [
   },
 ];
 
-// ─── Individual FAQ row ───────────────────────────────────────────────────────
 interface FAQItemProps {
   faq: { question: string; answer: string };
   index: number;
@@ -48,7 +47,7 @@ interface FAQItemProps {
 function FAQItem({ faq, index, isOpen, onToggle }: FAQItemProps) {
   const answerRef = useRef<HTMLDivElement>(null);
   const iconVRef = useRef<SVGSVGElement>(null);
-  const isFirst = useRef(true); // skip animation on first render
+  const isFirst = useRef(true);
 
   useEffect(() => {
     const el = answerRef.current;
@@ -56,7 +55,6 @@ function FAQItem({ faq, index, isOpen, onToggle }: FAQItemProps) {
     if (!el || !vLine) return;
 
     if (isFirst.current) {
-      // Set initial state without animating
       gsap.set(el, { height: isOpen ? "auto" : 0, opacity: isOpen ? 1 : 0 });
       gsap.set(vLine, { rotation: isOpen ? 0 : 90, opacity: isOpen ? 0 : 1 });
       isFirst.current = false;
@@ -66,7 +64,6 @@ function FAQItem({ faq, index, isOpen, onToggle }: FAQItemProps) {
     const tl = gsap.timeline({ defaults: { ease: "power2.inOut", duration: 0.35 } });
 
     if (isOpen) {
-      // Measure natural height, then animate to it
       gsap.set(el, { height: "auto", opacity: 1 });
       const fullH = el.offsetHeight;
       gsap.set(el, { height: 0, opacity: 0 });
@@ -96,24 +93,19 @@ function FAQItem({ faq, index, isOpen, onToggle }: FAQItemProps) {
         <span className="text-lg font-normal uppercase leading-5 text-black transition-opacity duration-200 group-hover:opacity-60">
           {faq.question}
         </span>
-
-        {/* Circle icon — horizontal line always visible, vertical fades in/out */}
         <span
           className="relative flex shrink-0 items-center justify-center w-12 h-12 rounded-full border border-black/30 transition-colors duration-200 group-hover:border-black"
           aria-hidden="true"
         >
-          {/* Horizontal bar — always visible */}
           <svg className="absolute" width="16" height="2" viewBox="0 0 16 2" fill="none">
             <line x1="0" y1="1" x2="16" y2="1" stroke="black" strokeWidth="1.2" />
           </svg>
-          {/* Vertical bar — rotates & fades out when open */}
           <svg ref={iconVRef} className="absolute" width="16" height="2" viewBox="0 0 16 2" fill="none">
             <line x1="0" y1="1" x2="16" y2="1" stroke="black" strokeWidth="1.2" />
           </svg>
         </span>
       </button>
 
-      {/* Answer — height animated by GSAP, overflow hidden so clip works */}
       <div ref={answerRef} className="overflow-hidden" style={{ height: 0, opacity: 0 }}>
         <div className="pb-5 text-base font-normal leading-5 text-grey-dark max-w-[478px]">
           {faq.answer}
@@ -123,7 +115,6 @@ function FAQItem({ faq, index, isOpen, onToggle }: FAQItemProps) {
   );
 }
 
-// ─── Section ─────────────────────────────────────────────────────────────────
 export default function FAQ() {
   const [openIndex, setOpenIndex] = useState<number | null>(0);
 
@@ -131,10 +122,8 @@ export default function FAQ() {
   const headingRef = useRef<HTMLDivElement>(null);
   const itemsRef = useRef<HTMLDivElement>(null);
 
-  // ── Entrance animations (ScrollTrigger) ──
   useEffect(() => {
     const ctx = gsap.context(() => {
-      // Heading slides up
       gsap.from(headingRef.current, {
         y: 28,
         opacity: 0,
@@ -147,7 +136,6 @@ export default function FAQ() {
         },
       });
 
-      // FAQ rows stagger up
       const rows = itemsRef.current?.querySelectorAll("[data-faq-item]");
       if (rows?.length) {
         gsap.from(rows, {
@@ -176,15 +164,11 @@ export default function FAQ() {
     <section ref={sectionRef} className="bg-black py-20">
       <div className="mx-16 overflow-hidden rounded-2xl bg-white">
         <div className="flex gap-16 p-16">
-
-          {/* Label */}
           <div ref={headingRef} className="w-44 shrink-0 pt-2">
             <h2 className="text-4xl font-normal uppercase leading-10 text-black">
               FAQs
             </h2>
           </div>
-
-          {/* Accordion */}
           <div ref={itemsRef} className="flex flex-1 flex-col">
             {faqs.map((faq, index) => (
               <FAQItem
@@ -196,7 +180,6 @@ export default function FAQ() {
               />
             ))}
           </div>
-
         </div>
       </div>
     </section>

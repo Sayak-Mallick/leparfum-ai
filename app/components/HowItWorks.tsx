@@ -1,13 +1,12 @@
 'use client';
 
-import React, { useRef, useLayoutEffect } from 'react';
+import { useRef, useLayoutEffect } from 'react';
 import Image from 'next/image';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 
 gsap.registerPlugin(ScrollTrigger);
 
-// imageLeft: true → steps 01 & 03 | false → step 02 (flex-row-reverse)
 const steps = [
   {
     num: '01',
@@ -43,8 +42,6 @@ export default function HowItWorks() {
 
   useLayoutEffect(() => {
     const ctx = gsap.context(() => {
-
-      // — Heading fade-up
       gsap.from(headingRef.current, {
         autoAlpha: 0,
         y: 40,
@@ -56,7 +53,6 @@ export default function HowItWorks() {
         },
       });
 
-      // — Vertical line black fill, scrubbed to scroll progress
       gsap.fromTo(
         lineFillRef.current,
         { height: '0%' },
@@ -72,14 +68,11 @@ export default function HowItWorks() {
         }
       );
 
-      // — Per-step animations
       steps.forEach((step, i) => {
         const imgEl = imageRefs.current[i];
         const textEl = textRefs.current[i];
         const dotEl = dotRefs.current[i];
         const hLineEl = hLineRefs.current[i];
-
-        // Image slides in from its visual side
         const imgX = step.imageLeft ? -60 : 60;
         const txtX = step.imageLeft ? 60 : -60;
 
@@ -90,7 +83,6 @@ export default function HowItWorks() {
           },
         });
 
-        // Dot scales in first
         tl.from(dotEl, {
           scale: 0,
           autoAlpha: 0,
@@ -98,14 +90,11 @@ export default function HowItWorks() {
           ease: 'back.out(2)',
         });
 
-        // Horizontal connector grows
         tl.from(
           hLineEl,
           { scaleX: 0, transformOrigin: step.imageLeft ? 'right center' : 'left center', duration: 0.35, ease: 'power2.out' },
           '<0.1'
         );
-
-        // Image & text slide in together
         tl.from(
           imgEl,
           { autoAlpha: 0, x: imgX, duration: 0.75, ease: 'power3.out' },
@@ -130,7 +119,6 @@ export default function HowItWorks() {
       </h2>
 
       <div className="relative">
-        {/* Vertical center line — gray base + black fill overlay */}
         <div className="pointer-events-none absolute inset-y-0 left-1/2 -translate-x-1/2 w-px">
           <div className="h-full bg-[#B8B8B8]" />
           <div
@@ -139,8 +127,6 @@ export default function HowItWorks() {
             style={{ height: '0%' }}
           />
         </div>
-
-        {/* Step 01 — image left, text right */}
         <div className="relative mb-32 flex items-center">
           <div
             ref={(el) => { hLineRefs.current[0] = el; }}
@@ -152,7 +138,6 @@ export default function HowItWorks() {
           >
             <span className="block size-5 rounded-full bg-black" />
           </div>
-
           <div ref={(el) => { imageRefs.current[0] = el; }} className="w-1/2 pr-16 pl-16">
             <div className="relative w-full max-h-[671px] h-[671px] overflow-hidden rounded-r-lg">
               <Image src="/how-it-works/tap-swipe-dream.png" alt="Step 1 — invitation" fill className="object-cover" />
@@ -179,7 +164,6 @@ export default function HowItWorks() {
           </div>
         </div>
 
-        {/* Step 02 — text left, image right */}
         <div className="relative mb-32 flex flex-row-reverse items-center">
           <div
             ref={(el) => { hLineRefs.current[1] = el; }}
@@ -218,7 +202,6 @@ export default function HowItWorks() {
           </div>
         </div>
 
-        {/* Step 03 — image left, text right */}
         <div className="relative flex items-center">
           <div
             ref={(el) => { hLineRefs.current[2] = el; }}

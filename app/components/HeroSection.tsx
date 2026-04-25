@@ -31,7 +31,6 @@ export default function HeroSection() {
 
   return (
     <section className="relative h-screen w-full overflow-hidden">
-      {/* Background images */}
       {IMAGES.map((src, index) => (
         <Image
           key={index}
@@ -44,14 +43,9 @@ export default function HeroSection() {
         />
       ))}
 
-      {/* Gradient overlays */}
       <div className="absolute inset-x-0 bottom-0 h-96 bg-linear-to-t from-zinc-950/80 to-transparent pointer-events-none" />
       <div className="absolute top-[153px] right-0 w-80 h-40 bg-linear-to-l from-zinc-950/40 to-transparent pointer-events-none hidden md:block" />
-
-      {/* Navbar integrated into the top */}
       <Navbar />
-
-      {/* Left dot pagination */}
       <div className="absolute left-6 md:left-[60px] top-1/2 z-10 flex -translate-y-1/2 flex-col gap-2">
         {IMAGES.map((_, index) => (
           <button
@@ -69,19 +63,29 @@ export default function HeroSection() {
         <button
           onClick={prevSlide}
           aria-label="Previous slide"
-          className="flex h-10 w-10 items-center justify-center border border-white/40 bg-black/20  backdrop-blur-sm transition-all hover:bg-white hover:border-white rounded-full"
+          /* Added 'group' class here */
+          className="group flex h-10 w-10 items-center justify-center border border-white/40 bg-black/20 backdrop-blur-sm transition-all hover:bg-white hover:border-white rounded-full"
         >
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" className="rotate-180">
-            <path d="M5 12H19M19 12L12 5M19 12L12 19" stroke="#181818" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+          <svg width="20" height="6" viewBox="0 0 20 6" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M20 3L3.07692 3" className="stroke-white group-hover:stroke-black transition-colors" />
+            <path
+              d="M3.86523 1.68457L3.86523 4.31543L1.52832 3L3.86523 1.68457Z"
+              className="fill-white stroke-white stroke-[1.5] group-hover:stroke-black group-hover:fill-black transition-colors"
+            />
           </svg>
         </button>
+
         <button
           onClick={nextSlide}
           aria-label="Next slide"
-          className="flex h-10 w-10 items-center justify-center border border-white/40 bg-black/20 backdrop-blur-sm transition-all hover:bg-white hover:border-white rounded-full"
+          className="group flex h-10 w-10 items-center justify-center border border-white/40 bg-black/20 backdrop-blur-sm transition-all hover:bg-white hover:border-white rounded-full"
         >
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none">
-            <path d="M5 12H19M19 12L12 5M19 12L12 19" stroke="#181818" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+          <svg width="20" height="6" viewBox="0 0 20 6" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M0 3L16.9231 3" className="stroke-white group-hover:stroke-black transition-colors" />
+            <path
+              d="M16.1348 4.31543L16.1348 1.68457L18.4717 3L16.1348 4.31543Z"
+              className="fill-white stroke-white stroke-[1.5] group-hover:stroke-black group-hover:fill-black transition-colors"
+            />
           </svg>
         </button>
       </div>

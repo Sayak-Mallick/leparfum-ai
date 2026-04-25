@@ -3,33 +3,73 @@
 import { useRef, useState } from 'react';
 import Image from 'next/image';
 
-const testimonials = Array(6).fill({
-  quote: "Our guests still talk about it. Each one left with something beautiful, personal and completely unforgettable. It was the perfect way to share a piece of our day — and ourselves — with everyone we love.",
-  author: "John Doe",
-  role: "VP of Employee Experience"
-});
+const testimonials = [
+  {
+    quote: "Our guests still talk about it. Each one left with something beautiful, personal and completely unforgettable — a piece of our day, captured in scent.",
+    author: "Priya Mehta",
+    role: "Bride, The Grand Oberoi Wedding"
+  },
+  {
+    quote: "We gifted these at our annual leadership summit and the response was extraordinary. Nothing we've done before came close to this level of personalisation.",
+    author: "James Whitfield",
+    role: "Chief People Officer, Meridian Group"
+  },
+  {
+    quote: "As a hotel GM, I'm always searching for experiences that genuinely surprise our guests. This did exactly that — and then some.",
+    author: "Isabelle Laurent",
+    role: "General Manager, Château Lumière Paris"
+  },
+  {
+    quote: "The AI conversation felt surprisingly intimate. By the end, my fragrance told a story I didn't even know I wanted to tell.",
+    author: "Marcus Okafor",
+    role: "Creative Director, Studio Noma"
+  },
+  {
+    quote: "We used it for a client appreciation evening and three of them called the next day just to say thank you. That never happens.",
+    author: "Serena Castillo",
+    role: "VP of Client Relations, Apex Ventures"
+  },
+  {
+    quote: "I was sceptical at first. Five minutes later I had a fragrance that somehow smelled exactly like how I feel on my best days.",
+    author: "Tom Hargreaves",
+    role: "Founder, Atlas Hospitality"
+  },
+  {
+    quote: "The AI conversation felt surprisingly intimate. By the end, my fragrance told a story I didn't even know I wanted to tell.",
+    author: "Huge Lucas",
+    role: "Founder, Lucas Group"
+  },
+  {
+    quote: "The best part is that it's completely unique to you. No two fragrances are the same.",
+    author: "Richard Parker",
+    role: "Faculty, Pearl Academy"
+  }
+];
 
 export default function Testimonials() {
   const sliderRef = useRef<HTMLDivElement>(null);
   const [currentSlide, setCurrentSlide] = useState(0);
 
+  const CARD_WIDTH = 580;
+  const GAP = 64;
+  const ITEM_WIDTH = CARD_WIDTH + GAP;
+
   const handleScroll = () => {
     if (sliderRef.current) {
       const scrollLeft = sliderRef.current.scrollLeft;
-      const itemWidth = 580 + 64;
-      const newSlide = Math.round(scrollLeft / itemWidth);
-      setCurrentSlide(newSlide);
+      const newSlide = Math.round(scrollLeft / ITEM_WIDTH);
+      if (newSlide !== currentSlide && newSlide < testimonials.length) {
+        setCurrentSlide(newSlide);
+      }
     }
   };
 
   const scrollToSlide = (index: number) => {
     if (sliderRef.current) {
-      const itemWidth = 580 + 64;
       sliderRef.current.scrollTo({
-        left: index * itemWidth,
+        left: index * ITEM_WIDTH,
         behavior: 'smooth'
       });
-      setCurrentSlide(index);
     }
   };
 
@@ -55,16 +95,15 @@ export default function Testimonials() {
       <div className="pointer-events-none absolute left-0 top-[247px] z-10 h-60 w-80 bg-linear-to-r from-black to-transparent"></div>
       <div className="pointer-events-none absolute right-0 bottom-0 z-10 h-60 w-80 bg-linear-to-l from-black to-transparent"></div>
 
-      {/* Testimonial scroll area */}
       <div
         ref={sliderRef}
         onScroll={handleScroll}
-        className="absolute top-[239px] left-0 right-0 flex gap-16 overflow-x-auto px-16 no-scrollbar snap-x snap-mandatory"
+        className="absolute top-[239px] left-0 right-0 flex gap-16 overflow-x-auto px-16 no-scrollbar snap-x snap-mandatory scroll-pl-16"
         style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}
       >
         {testimonials.map((t, i) => (
-          <article key={i} className="relative w-[580px] shrink-0 flex flex-col gap-6 snap-center">
-            {i !== testimonials.length - 1 && (
+          <article key={i} className="relative w-[580px] shrink-0 flex flex-col gap-6 snap-start">
+            {i !== testimonials.length - 3 && (
               <div className="absolute top-1/2 -right-8 h-[249px] w-px -translate-y-1/2">
                 <Image src="/t-divider.svg" alt="" fill className="object-cover" />
               </div>
@@ -85,11 +124,10 @@ export default function Testimonials() {
             </footer>
           </article>
         ))}
+        <div className="w-[calc(100vw-644px)] shrink-0" aria-hidden="true" />
       </div>
 
-      {/* Controls bar */}
       <div className="absolute bottom-16 left-32 right-32 flex items-center justify-between">
-        {/* Dots */}
         <div className="flex gap-2">
           {testimonials.map((_, i) => (
             <button
@@ -101,24 +139,24 @@ export default function Testimonials() {
             />
           ))}
         </div>
-        {/* Arrows */}
+
         <div className="flex gap-8">
           <button
             onClick={prevSlide}
             aria-label="Previous"
             disabled={currentSlide === 0}
-            className="arrow-btn flex h-10 w-10 rotate-180 items-center justify-center rounded-full border border-white/30 transition-opacity hover:opacity-75 disabled:cursor-not-allowed disabled:opacity-30"
+            className="flex h-10 w-10 rotate-180 items-center justify-center rounded-full border border-white/30 transition-opacity hover:opacity-75 disabled:cursor-not-allowed disabled:opacity-30"
           >
             <svg width="20" height="6" viewBox="0 0 20 6" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <path d="M20 3L3.0769 3" stroke="white" />
-              <path d="M3.8652 1.68457L3.8652 4.31543L1.5283 3L3.8652 1.68457Z" fill="white" stroke="white" strokeWidth="1.5" />
+              <path d="M20 3L3.07692 3" stroke="white" />
+              <path d="M3.86523 1.68457L3.86523 4.31543L1.52832 3L3.86523 1.68457Z" fill="white" stroke="white" stroke-width="1.5" />
             </svg>
           </button>
           <button
             onClick={nextSlide}
             aria-label="Next"
             disabled={currentSlide === testimonials.length - 1}
-            className="arrow-btn flex h-10 w-10 items-center justify-center rounded-full border border-white/30 transition-opacity hover:opacity-75 disabled:cursor-not-allowed disabled:opacity-30"
+            className="flex h-10 w-10 items-center justify-center rounded-full border border-white/30 transition-opacity hover:opacity-75 disabled:cursor-not-allowed disabled:opacity-30"
           >
             <svg width="20" height="6" viewBox="0 0 20 6" fill="none" xmlns="http://www.w3.org/2000/svg">
               <path d="M0 3L16.9231 3" stroke="white" />

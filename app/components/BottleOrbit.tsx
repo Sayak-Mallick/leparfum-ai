@@ -1,6 +1,5 @@
 "use client";
 
-import React from 'react';
 import Image from 'next/image';
 
 const BOTTLE_IMAGES = [
@@ -15,7 +14,6 @@ const ORBIT_RADIUS = 450; // in pixels
 export default function BottleOrbit() {
   return (
     <section className="relative h-screen overflow-hidden bg-white">
-      {/* Orbiting container */}
       <div
         className="absolute inset-0 z-0 animate-spin"
         style={{ animationDuration: '60s', animationTimingFunction: 'linear' }}
@@ -42,8 +40,6 @@ export default function BottleOrbit() {
           );
         })}
       </div>
-
-      {/* Center content */}
       <div className="relative z-10 flex h-full flex-col items-center justify-center gap-12 pointer-events-none">
         <div className="flex max-w-[497px] flex-col items-center gap-8 text-center pointer-events-auto">
           <h2 className="text-4xl font-normal uppercase leading-10 text-black">
@@ -56,8 +52,6 @@ export default function BottleOrbit() {
             the people themselves, each crafted with exceptional care.
           </p>
         </div>
-
-        {/* Input CTA */}
         <div className="flex items-end gap-2 pointer-events-auto">
           <div className="size-12 shrink-0 rounded-full bg-stone-300 overflow-hidden">
             <Image src="/bottles/Desert Elixir.png" width={100} height={100} alt="" className="w-full h-full object-cover" />
