@@ -14,7 +14,7 @@ const ORBIT_RADIUS = 450; // in pixels
 
 export default function BottleOrbit() {
   return (
-    <section className="relative h-[850px] overflow-hidden bg-white">
+    <section className="relative h-screen overflow-hidden bg-white">
       {/* Orbiting container */}
       <div
         className="absolute inset-0 z-0 animate-spin"

@@ -24,7 +24,7 @@ export default function HowItWorks() {
             <span className="block size-5 rounded-full bg-black"></span>
           </div>
           
-          <div className="w-1/2 pr-16">
+          <div className="w-1/2 pr-16 pl-16">
             <div className="relative w-full max-h-[671px] h-[671px] overflow-hidden rounded-r-lg">
               <Image
                 src="/how-it-works/tap-swipe-dream.png"
@@ -68,7 +68,7 @@ export default function HowItWorks() {
           </div>
 
           <div className="w-1/2 pl-16">
-            <div className="relative h-[671px] w-full overflow-hidden rounded-l-lg">
+            <div className="relative max-h-[671px] h-[671px] w-full overflow-hidden rounded-l-lg">
               <Image
                 src="/how-it-works/5-min-ai-creation.png"
                 alt="Step 2 — AI creation"
@@ -110,8 +110,8 @@ export default function HowItWorks() {
             <span className="block size-5 rounded-full bg-black"></span>
           </div>
 
-          <div className="w-1/2 pr-16">
-            <div className="relative h-[671px] w-full overflow-hidden rounded-r-lg">
+          <div className="w-1/2 pr-16 pl-16">
+            <div className="relative max-h-[671px] h-[671px] w-full overflow-hidden rounded-r-lg">
               <Image
                 src="/how-it-works/bottle-awaits-on-big-day.png"
                 alt="Step 3 — delivery"
