@@ -4,6 +4,7 @@ import BrokenGift from "./components/BrokenGift";
 import Testimonials from "./components/Testimonials";
 import FAQ from "./components/FAQ";
 import BottleOrbit from "./components/BottleOrbit";
+import HowItWorks from "./components/HowItWorks";
 
 export default function Home() {
   return (
@@ -11,6 +12,7 @@ export default function Home() {
       <HeroSection />
       <BrokenGift />
       <BottleOrbit />
+      <HowItWorks />
       <Testimonials />
       <FAQ />
       <Footer />
