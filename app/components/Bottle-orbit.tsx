@@ -15,7 +15,6 @@ const BOTTLE_IMAGES = [
 ];
 
 const NUM_BOTTLES = 12;
-const ORBIT_RADIUS = 450;
 
 export default function BottleOrbit() {
   return (
@@ -29,9 +28,9 @@ export default function BottleOrbit() {
           return (
             <div
               key={idx}
-              className="absolute top-1/2 left-1/2 w-28 h-40"
+              className="absolute top-1/2 left-1/2 w-20 h-28 sm:w-24 sm:h-32 md:w-28 md:h-40"
               style={{
-                transform: `translate(-50%, -50%) rotate(${angle}deg) translateY(-${ORBIT_RADIUS}px)`
+                transform: `translate(-50%, -50%) rotate(${angle}deg) translateY(clamp(-240px, -30vw, -450px))`
               }}
             >
               <Image
@@ -46,22 +45,24 @@ export default function BottleOrbit() {
           );
         })}
       </div>
-      <div className="relative z-10 flex h-full flex-col items-center justify-center gap-12 pointer-events-none">
-        <div className="flex max-w-[497px] flex-col items-center gap-8 text-center pointer-events-auto">
-          <h2 className="text-4xl font-normal uppercase leading-10 text-black">
+
+      <div className="relative z-10 flex h-full flex-col items-center justify-center gap-8 md:gap-12 pointer-events-none px-6">
+        <div className="flex w-full max-w-sm md:max-w-[497px] flex-col items-center gap-5 md:gap-8 text-center pointer-events-auto">
+          <h2 className="text-3xl md:text-4xl font-normal uppercase leading-tight md:leading-10 text-black">
             Uniquely Bottled
           </h2>
-          <p className="text-base font-normal leading-5 text-black">
+          <p className="text-sm md:text-base font-normal leading-relaxed md:leading-5 text-black">
             Every guest and recipient experiences moments differently. We
             transform these unique perspectives into individual
             fragrances—creating a diverse collection of scents as distinctive as
             the people themselves, each crafted with exceptional care.
           </p>
         </div>
-        <div className="flex items-end gap-2 pointer-events-auto">
-          <div className="size-12 shrink-0 rounded-full bg-stone-300 overflow-hidden">
+
+        <div className="flex items-end gap-2 pointer-events-auto w-full max-w-sm md:max-w-none md:w-auto">
+          <div className="size-10 md:size-12 shrink-0 rounded-full bg-stone-300 overflow-hidden">
             <div
-              className="flex size-10 md:size-12 shrink-0 items-center justify-center rounded-full text-[18px] md:text-[20px] font-bold"
+              className="flex size-10 md:size-12 shrink-0 items-center justify-center rounded-full text-base md:text-[20px] font-bold"
               style={{
                 backgroundColor: "rgba(0,0,0,0.12)",
                 color: "#111",
@@ -71,14 +72,14 @@ export default function BottleOrbit() {
               E
             </div>
           </div>
-          <div className="flex w-80 flex-col gap-1">
+          <div className="flex flex-1 md:w-80 md:flex-none flex-col gap-1">
             <span className="text-xs font-normal uppercase leading-3 text-grey-dark">
               How can you elevate your big day?
             </span>
-            <div className="relative h-12">
+            <div className="relative h-11 md:h-12">
               <input
                 type="text"
-                className="absolute inset-0 w-full h-full rounded-sm border border-ui-grey bg-transparent px-4 focus:outline-none text-black"
+                className="absolute inset-0 w-full h-full rounded-sm border border-ui-grey bg-transparent px-4 focus:outline-none text-black text-sm md:text-base"
                 placeholder=""
               />
               <button aria-label="Submit" className="absolute right-4 top-1/2 -translate-y-1/2">

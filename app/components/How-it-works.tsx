@@ -73,13 +73,17 @@ export default function HowItWorks() {
         const textEl = textRefs.current[i];
         const dotEl = dotRefs.current[i];
         const hLineEl = hLineRefs.current[i];
-        const imgX = step.imageLeft ? -60 : 60;
-        const txtX = step.imageLeft ? 60 : -60;
+
+        const isMobile = window.innerWidth < 768;
+        const imgX = isMobile ? 0 : step.imageLeft ? -60 : 60;
+        const txtX = isMobile ? 0 : step.imageLeft ? 60 : -60;
+        const imgY = isMobile ? 40 : 0;
+        const txtY = isMobile ? 30 : 0;
 
         const tl = gsap.timeline({
           scrollTrigger: {
             trigger: imgEl,
-            start: 'top 78%',
+            start: 'top 82%',
           },
         });
 
@@ -92,34 +96,46 @@ export default function HowItWorks() {
 
         tl.from(
           hLineEl,
-          { scaleX: 0, transformOrigin: step.imageLeft ? 'right center' : 'left center', duration: 0.35, ease: 'power2.out' },
+          {
+            scaleX: 0,
+            transformOrigin: isMobile
+              ? 'center center'
+              : step.imageLeft
+                ? 'right center'
+                : 'left center',
+            duration: 0.35,
+            ease: 'power2.out',
+          },
           '<0.1'
         );
+
         tl.from(
           imgEl,
-          { autoAlpha: 0, x: imgX, duration: 0.75, ease: 'power3.out' },
+          { autoAlpha: 0, x: imgX, y: imgY, duration: 0.75, ease: 'power3.out' },
           '<0.05'
         );
         tl.from(
           textEl,
-          { autoAlpha: 0, x: txtX, duration: 0.75, ease: 'power3.out' },
+          { autoAlpha: 0, x: txtX, y: txtY, duration: 0.75, ease: 'power3.out' },
           '<0.1'
         );
       });
-
     }, sectionRef);
 
     return () => ctx.revert();
   }, []);
 
   return (
-    <section ref={sectionRef} className="relative overflow-hidden bg-white py-32">
-      <h2 ref={headingRef} className="mb-24 text-center text-5xl font-normal uppercase leading-tight text-black">
+    <section ref={sectionRef} className="relative overflow-hidden bg-white py-20 md:py-32">
+      <h2
+        ref={headingRef}
+        className="mb-16 px-6 text-center text-4xl font-normal uppercase leading-tight text-black md:mb-24 md:text-5xl"
+      >
         How it works
       </h2>
 
       <div className="relative">
-        <div className="pointer-events-none absolute inset-y-0 left-1/2 -translate-x-1/2 w-px">
+        <div className="pointer-events-none absolute inset-y-0 left-6 w-px md:left-1/2 md:-translate-x-1/2">
           <div className="h-full bg-[#B8B8B8]" />
           <div
             ref={lineFillRef}
@@ -127,118 +143,84 @@ export default function HowItWorks() {
             style={{ height: '0%' }}
           />
         </div>
-        <div className="relative mb-32 flex items-center">
-          <div
-            ref={(el) => { hLineRefs.current[0] = el; }}
-            className="absolute left-[calc(50%-4rem)] top-1/2 z-0 h-px w-16 -translate-y-1/2 bg-black"
-          />
-          <div
-            ref={(el) => { dotRefs.current[0] = el; }}
-            className="absolute left-1/2 top-1/2 z-10 flex size-8 -translate-x-1/2 -translate-y-1/2 items-center justify-center rounded-full border border-black bg-white"
-          >
-            <span className="block size-5 rounded-full bg-black" />
-          </div>
-          <div ref={(el) => { imageRefs.current[0] = el; }} className="w-1/2 pr-16 pl-16">
-            <div className="relative w-full max-h-[671px] h-[671px] overflow-hidden rounded-r-lg">
-              <Image src="/how-it-works/tap-swipe-dream.png" alt="Step 1 — invitation" fill className="object-cover" />
-            </div>
-          </div>
-          <div ref={(el) => { textRefs.current[0] = el; }} className="flex w-1/2 max-w-2xl flex-col gap-8 pl-20 pr-32">
-            <div className="flex flex-col gap-2">
-              <span className="text-2xl font-normal uppercase text-black">01</span>
-              <h3 className="text-3xl font-normal uppercase leading-10 text-black">Tap, Swipe, Dream</h3>
-            </div>
-            <div className="flex flex-col gap-4">
-              <p className="text-base font-normal leading-5 text-black">
-                It begins with digital invitations sent to your event guests or team members.
-                Each recipient engages with our AI through natural conversation—sharing their
-                unique perspective or meaningful connection.
-              </p>
-              <p className="text-xs font-normal leading-4 text-grey-dark">
-                Our technology transforms these insights into personalized fragrance profiles,
-                which master perfumers bring to life using premium ingredients. The finished
-                scents arrive in elegant packaging customizable for your event or
-                brand—creating a sophisticated keepsake that&apos;s genuinely personal.
-              </p>
-            </div>
-          </div>
-        </div>
 
-        <div className="relative mb-32 flex flex-row-reverse items-center">
-          <div
-            ref={(el) => { hLineRefs.current[1] = el; }}
-            className="absolute left-1/2 top-1/2 z-0 h-px w-16 -translate-y-1/2 bg-black"
-          />
-          <div
-            ref={(el) => { dotRefs.current[1] = el; }}
-            className="absolute left-1/2 top-1/2 z-10 flex size-8 -translate-x-1/2 -translate-y-1/2 items-center justify-center rounded-full border border-black bg-white"
-          >
-            <span className="block size-5 rounded-full bg-black" />
-          </div>
+        {steps.map((step, i) => {
+          const isLast = i === steps.length - 1;
+          const isReversed = !step.imageLeft;
 
-          <div ref={(el) => { imageRefs.current[1] = el; }} className="w-1/2 pl-16">
-            <div className="relative max-h-[671px] h-[671px] w-full overflow-hidden rounded-l-lg">
-              <Image src="/how-it-works/5-min-ai-creation.png" alt="Step 2 — AI creation" fill className="object-cover" />
-            </div>
-          </div>
-          <div ref={(el) => { textRefs.current[1] = el; }} className="flex w-1/2 max-w-2xl flex-col gap-8 pl-32 pr-20">
-            <div className="flex flex-col gap-2">
-              <span className="text-2xl font-normal uppercase text-black">02</span>
-              <h3 className="text-3xl font-normal uppercase leading-10 text-black">Five‑minute AI creation</h3>
-            </div>
-            <div className="flex flex-col gap-4">
-              <p className="text-base font-normal leading-5 text-black">
-                It begins with digital invitations sent to your event guests or team members.
-                Each recipient engages with our AI through natural conversation—sharing their
-                unique perspective or meaningful connection.
-              </p>
-              <p className="text-xs font-normal leading-4 text-grey-dark">
-                Our technology transforms these insights into personalized fragrance profiles,
-                which master perfumers bring to life using premium ingredients. The finished
-                scents arrive in elegant packaging customizable for your event or
-                brand—creating a sophisticated keepsake that&apos;s genuinely personal.
-              </p>
-            </div>
-          </div>
-        </div>
+          return (
+            <div
+              key={step.num}
+              className={`relative ${isLast ? '' : 'mb-20 md:mb-32'} flex flex-col md:flex-row md:items-center ${isReversed ? 'md:flex-row-reverse' : ''
+                }`}
+            >
+              <div
+                ref={(el) => { hLineRefs.current[i] = el; }}
+                className={`absolute top-6 z-0 h-px w-10 bg-black md:top-1/2 md:w-16 md:-translate-y-1/2 ${isReversed
+                    ? 'left-6 md:left-1/2'
+                    : 'left-6 md:left-[calc(50%-4rem)]'
+                  }`}
+              />
 
-        <div className="relative flex items-center">
-          <div
-            ref={(el) => { hLineRefs.current[2] = el; }}
-            className="absolute left-[calc(50%-4rem)] top-1/2 z-0 h-px w-16 -translate-y-1/2 bg-black"
-          />
-          <div
-            ref={(el) => { dotRefs.current[2] = el; }}
-            className="absolute left-1/2 top-1/2 z-10 flex size-8 -translate-x-1/2 -translate-y-1/2 items-center justify-center rounded-full border border-black bg-white"
-          >
-            <span className="block size-5 rounded-full bg-black" />
-          </div>
+              <div
+                ref={(el) => { dotRefs.current[i] = el; }}
+                className="absolute left-6 top-6 z-10 flex size-6 -translate-x-1/2 -translate-y-1/2 items-center justify-center rounded-full border border-black bg-white md:left-1/2 md:top-1/2 md:size-8"
+              >
+                <span className="block size-3 rounded-full bg-black md:size-5" />
+              </div>
 
-          <div ref={(el) => { imageRefs.current[2] = el; }} className="w-1/2 pr-16 pl-16">
-            <div className="relative max-h-[671px] h-[671px] w-full overflow-hidden rounded-r-lg">
-              <Image src="/how-it-works/bottle-awaits-on-big-day.png" alt="Step 3 — delivery" fill className="object-cover" />
+              <div
+                ref={(el) => { imageRefs.current[i] = el; }}
+                className={`w-full pl-14 pr-4 pt-0 md:w-1/2 md:pt-0 ${isReversed
+                    ? 'md:pl-16 md:pr-0'
+                    : 'md:pl-16 md:pr-16'
+                  }`}
+              >
+                <div className="relative h-64 w-full overflow-hidden rounded-lg sm:h-80 md:h-[671px] md:max-h-[671px] md:rounded-r-lg md:rounded-l-none">
+                  {isReversed && (
+                    <div className="absolute inset-0 hidden md:block" style={{ borderRadius: '0.5rem 0 0 0.5rem' }} />
+                  )}
+                  <Image
+                    src={step.img}
+                    alt={step.alt}
+                    fill
+                    className={`object-cover ${isReversed ? 'md:rounded-l-lg md:rounded-r-none' : 'md:rounded-r-lg md:rounded-l-none'}`}
+                  />
+                </div>
+              </div>
+
+              <div
+                ref={(el) => { textRefs.current[i] = el; }}
+                className={`flex w-full flex-col gap-5 pl-14 pr-4 pt-6 md:w-1/2 md:max-w-2xl md:gap-8 md:pt-0 ${isReversed
+                    ? 'md:pl-32 md:pr-20'
+                    : 'md:pl-20 md:pr-32'
+                  }`}
+              >
+                <div className="flex flex-col gap-1 md:gap-2">
+                  <span className="text-lg font-normal uppercase text-black md:text-2xl">
+                    {step.num}
+                  </span>
+                  <h3 className="text-2xl font-normal uppercase leading-tight text-black md:text-3xl md:leading-10">
+                    {step.title}
+                  </h3>
+                </div>
+                <div className="flex flex-col gap-3 md:gap-4">
+                  <p className="text-sm font-normal leading-relaxed text-black md:text-base md:leading-5">
+                    It begins with digital invitations sent to your event guests or team members.
+                    Each recipient engages with our AI through natural conversation—sharing their
+                    unique perspective or meaningful connection.
+                  </p>
+                  <p className="text-xs font-normal leading-relaxed text-grey-dark md:leading-4">
+                    Our technology transforms these insights into personalized fragrance profiles,
+                    which master perfumers bring to life using premium ingredients. The finished
+                    scents arrive in elegant packaging customizable for your event or
+                    brand—creating a sophisticated keepsake that&apos;s genuinely personal.
+                  </p>
+                </div>
+              </div>
             </div>
-          </div>
-          <div ref={(el) => { textRefs.current[2] = el; }} className="flex w-1/2 max-w-2xl flex-col gap-8 pl-20 pr-32">
-            <div className="flex flex-col gap-2">
-              <span className="text-2xl font-normal uppercase text-black">03</span>
-              <h3 className="text-3xl font-normal uppercase leading-10 text-black">Bottles await on the big day</h3>
-            </div>
-            <div className="flex flex-col gap-4">
-              <p className="text-base font-normal leading-5 text-black">
-                It begins with digital invitations sent to your event guests or team members.
-                Each recipient engages with our AI through natural conversation—sharing their
-                unique perspective or meaningful connection.
-              </p>
-              <p className="text-xs font-normal leading-4 text-grey-dark">
-                Our technology transforms these insights into personalized fragrance profiles,
-                which master perfumers bring to life using premium ingredients. The finished
-                scents arrive in elegant packaging customizable for your event or
-                brand—creating a sophisticated keepsake that&apos;s genuinely personal.
-              </p>
-            </div>
-          </div>
-        </div>
+          );
+        })}
       </div>
     </section>
   );

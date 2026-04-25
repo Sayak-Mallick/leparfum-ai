@@ -67,7 +67,6 @@ function FAQItem({ faq, index, isOpen, onToggle }: FAQItemProps) {
       gsap.set(el, { height: "auto", opacity: 1 });
       const fullH = el.offsetHeight;
       gsap.set(el, { height: 0, opacity: 0 });
-
       tl.to(el, { height: fullH, opacity: 1 })
         .to(vLine, { rotation: 0, opacity: 0, duration: 0.25 }, "<");
     } else {
@@ -86,28 +85,28 @@ function FAQItem({ faq, index, isOpen, onToggle }: FAQItemProps) {
       className={`border-t border-ui-grey ${isLast ? "border-b" : ""}`}
     >
       <button
-        className="flex w-full items-center justify-between gap-8 py-4 text-left cursor-pointer group"
+        className="flex w-full items-start justify-between gap-4 py-4 text-left cursor-pointer group md:items-center md:gap-8"
         onClick={onToggle}
         aria-expanded={isOpen}
       >
-        <span className="text-lg font-normal uppercase leading-5 text-black transition-opacity duration-200 group-hover:opacity-60">
+        <span className="text-sm font-normal uppercase leading-5 text-black transition-opacity duration-200 group-hover:opacity-60 md:text-lg">
           {faq.question}
         </span>
         <span
-          className="relative flex shrink-0 items-center justify-center w-12 h-12 rounded-full border border-black/30 transition-colors duration-200 group-hover:border-black"
+          className="relative mt-0.5 flex shrink-0 items-center justify-center w-8 h-8 rounded-full border border-black/30 transition-colors duration-200 group-hover:border-black md:mt-0 md:w-12 md:h-12"
           aria-hidden="true"
         >
-          <svg className="absolute" width="16" height="2" viewBox="0 0 16 2" fill="none">
+          <svg className="absolute" width="12" height="2" viewBox="0 0 16 2" fill="none">
             <line x1="0" y1="1" x2="16" y2="1" stroke="black" strokeWidth="1.2" />
           </svg>
-          <svg ref={iconVRef} className="absolute" width="16" height="2" viewBox="0 0 16 2" fill="none">
+          <svg ref={iconVRef} className="absolute" width="12" height="2" viewBox="0 0 16 2" fill="none">
             <line x1="0" y1="1" x2="16" y2="1" stroke="black" strokeWidth="1.2" />
           </svg>
         </span>
       </button>
 
       <div ref={answerRef} className="overflow-hidden" style={{ height: 0, opacity: 0 }}>
-        <div className="pb-5 text-base font-normal leading-5 text-grey-dark max-w-[478px]">
+        <div className="pb-5 text-sm font-normal leading-relaxed text-grey-dark md:text-base md:leading-5 md:max-w-[478px]">
           {faq.answer}
         </div>
       </div>
@@ -117,7 +116,6 @@ function FAQItem({ faq, index, isOpen, onToggle }: FAQItemProps) {
 
 export default function FAQ() {
   const [openIndex, setOpenIndex] = useState<number | null>(0);
-
   const sectionRef = useRef<HTMLElement>(null);
   const headingRef = useRef<HTMLDivElement>(null);
   const itemsRef = useRef<HTMLDivElement>(null);
@@ -156,16 +154,12 @@ export default function FAQ() {
     return () => ctx.revert();
   }, []);
 
-  const handleToggle = (index: number) => {
-    setOpenIndex(openIndex === index ? null : index);
-  };
-
   return (
-    <section ref={sectionRef} className="bg-black py-20">
-      <div className="mx-16 overflow-hidden rounded-2xl bg-white">
-        <div className="flex gap-16 p-16">
-          <div ref={headingRef} className="w-44 shrink-0 pt-2">
-            <h2 className="text-4xl font-normal uppercase leading-10 text-black">
+    <section ref={sectionRef} className="bg-black py-6 md:py-20">
+      <div className="mx-4 overflow-hidden rounded-xl bg-white md:mx-16 md:rounded-2xl">
+        <div className="flex flex-col gap-6 p-6 md:flex-row md:gap-16 md:p-16">
+          <div ref={headingRef} className="shrink-0 md:w-44 md:pt-2">
+            <h2 className="text-3xl font-normal uppercase leading-tight text-black md:text-4xl md:leading-10">
               FAQs
             </h2>
           </div>
@@ -176,7 +170,7 @@ export default function FAQ() {
                 faq={faq}
                 index={index}
                 isOpen={openIndex === index}
-                onToggle={() => handleToggle(index)}
+                onToggle={() => setOpenIndex(openIndex === index ? null : index)}
               />
             ))}
           </div>
