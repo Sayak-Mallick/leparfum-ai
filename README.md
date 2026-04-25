@@ -1,36 +1,28 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# leparfum.ai
 
-## Getting Started
+Landing page for [leparfum.ai](https://leparfum.ai) — a platform that generates personalised fragrances through AI conversations.
 
-First, run the development server:
+**Live:** https://leparfum-ai.vercel.app/
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+---
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Stack
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+- **Next.js** + **TypeScript**
+- **Tailwind CSS**
+- **GSAP** + **ScrollTrigger** — scroll-driven animations
+- **Lenis** — smooth scroll
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+---
 
-## Learn More
+## What I worked on
 
-To learn more about Next.js, take a look at the following resources:
+Frontend only. I built the full landing page from the provided designs — markup, styling, animations, and making it work across screen sizes.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+A few things that took more thought than expected:
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+**Animations without fighting the layout** — sections like `HowItWorks` use a scroll-driven vertical timeline where a line fills as you scroll and each step animates in from the side. Getting GSAP's `ScrollTrigger` to play nicely with Lenis required making sure Lenis ticks before ScrollTrigger on every frame, otherwise scroll positions would drift.
 
-## Deploy on Vercel
+**The bottle orbit** — 12 bottles arranged in a circle, rotating continuously using CSS `animation: spin`. The tricky part was the orbit radius: a hardcoded `translateY` value breaks at different viewport sizes. Ended up using a CSS custom property with `clamp()` so the radius scales with the viewport without any JS resize logic.
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+**Responsive without breaking the desktop** — most components were designed desktop-first with fixed pixel values and absolute positioning. Making them mobile-responsive meant rethinking the layout structure (stacked vs side-by-side, fixed heights vs fluid) while keeping the desktop output pixel-perfect. The testimonials slider, FAQ accordion, and orbit section each needed a different approach.
