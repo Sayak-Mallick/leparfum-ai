@@ -24,7 +24,7 @@ const sections = [
   },
   {
     id: "wedding-story",
-    image: "/broken-gift/wedding.jpg",
+    image: "/brokengift.png",
     alt: "Wedding Story",
     bg: "#1C1B18",
     eyebrow: "Weddings",
@@ -37,7 +37,7 @@ const sections = [
   },
   {
     id: "corporate-ritual",
-    image: "/broken-gift/corporate.jpg",
+    image: "/brokengift.png",
     alt: "Corporate Ritual",
     bg: "#2A2318",
     eyebrow: "Corporate",
@@ -50,7 +50,7 @@ const sections = [
   },
   {
     id: "anniversary",
-    image: "/broken-gift/anniversary.jpg",
+    image: "/brokengift.png",
     alt: "Anniversary Edition",
     bg: "#F5F0E8",
     eyebrow: "Anniversaries",
@@ -63,7 +63,7 @@ const sections = [
   },
   {
     id: "private-label",
-    image: "/broken-gift/private.jpg",
+    image: "/brokengift.png",
     alt: "Private Label",
     bg: "#0D1117",
     eyebrow: "Private Label",
@@ -76,7 +76,7 @@ const sections = [
   },
   {
     id: "seasonal",
-    image: "/broken-gift/seasonal.jpg",
+    image: "/brokengift.png",
     alt: "Seasonal Collection",
     bg: "#3B2A1A",
     eyebrow: "Seasonal",

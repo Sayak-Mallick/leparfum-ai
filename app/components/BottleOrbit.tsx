@@ -3,13 +3,19 @@
 import Image from 'next/image';
 
 const BOTTLE_IMAGES = [
-  "/bottles/Desert Elixir.png",
-  "/bottles/Mystic Forest.png",
-  "/bottles/Sunset Dunes.png",
+  "/bottles/beach-setting.png",
+  "/bottles/desert-elixir.png",
+  "/bottles/flowery-field.png",
+  "/bottles/glittering.png",
+  "/bottles/glowing-red.png",
+  "/bottles/moody-rainy.png",
+  "/bottles/moonlit-night.png",
+  "/bottles/tropical-jungle.png",
+  "/bottles/warm-bottle.png",
 ];
 
 const NUM_BOTTLES = 12;
-const ORBIT_RADIUS = 450; // in pixels
+const ORBIT_RADIUS = 450;
 
 export default function BottleOrbit() {
   return (
@@ -54,7 +60,16 @@ export default function BottleOrbit() {
         </div>
         <div className="flex items-end gap-2 pointer-events-auto">
           <div className="size-12 shrink-0 rounded-full bg-stone-300 overflow-hidden">
-            <Image src="/bottles/Desert Elixir.png" width={100} height={100} alt="" className="w-full h-full object-cover" />
+            <div
+              className="flex size-10 md:size-12 shrink-0 items-center justify-center rounded-full text-[18px] md:text-[20px] font-bold"
+              style={{
+                backgroundColor: "rgba(0,0,0,0.12)",
+                color: "#111",
+                backdropFilter: "blur(8px)",
+              }}
+            >
+              E
+            </div>
           </div>
           <div className="flex w-80 flex-col gap-1">
             <span className="text-xs font-normal uppercase leading-3 text-grey-dark">
