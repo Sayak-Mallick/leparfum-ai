@@ -111,7 +111,7 @@ export default function Testimonials() {
           >
             <svg width="20" height="6" viewBox="0 0 20 6" fill="none" xmlns="http://www.w3.org/2000/svg">
               <path d="M20 3L3.0769 3" stroke="white" />
-              <path d="M3.8652 1.68457L3.8652 4.31543L1.5283 3L3.8652 1.68457Z" fill="white" stroke="white" stroke-width="1.5" />
+              <path d="M3.8652 1.68457L3.8652 4.31543L1.5283 3L3.8652 1.68457Z" fill="white" stroke="white" strokeWidth="1.5" />
             </svg>
           </button>
           <button
@@ -122,7 +122,7 @@ export default function Testimonials() {
           >
             <svg width="20" height="6" viewBox="0 0 20 6" fill="none" xmlns="http://www.w3.org/2000/svg">
               <path d="M0 3L16.9231 3" stroke="white" />
-              <path d="M16.1348 4.31543L16.1348 1.68457L18.4717 3L16.1348 4.31543Z" fill="white" stroke="white" stroke-width="1.5" />
+              <path d="M16.1348 4.31543L16.1348 1.68457L18.4717 3L16.1348 4.31543Z" fill="white" stroke="white" strokeWidth="1.5" />
             </svg>
           </button>
         </div>
